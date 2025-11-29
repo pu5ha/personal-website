@@ -1,26 +1,686 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background: #000000;
+  color: #e0e0e0;
+  line-height: 1.6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(0, 255, 150, 0.3);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff96;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00d47a;
+}
+
+/* Main Container */
+.container {
+  min-height: 100vh;
+  background: #000000;
+  color: #e0e0e0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.lastUpdate {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-size: 0.85rem;
+  color: #888;
+  font-family: 'Courier New', monospace;
+}
+
+.main {
+  max-width: 1000px;  /* Changed from 800px */
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+}
+
+/* Hero Section */
+.hero {
+  margin-bottom: 2.5rem;
+  padding-top: 1rem;
+}
+
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 2rem;  /* Changed from 1.5rem */
+  margin-bottom: 1.5rem;
+}
+
+.profilePic {
+  border-radius: 50%;
+  border: 3px solid #00ff96;
+  box-shadow: 0 0 20px rgba(0, 255, 150, 0.3);
+  object-fit: cover;
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.mainName {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #00ff96;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+}
+
+.intro {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #cccccc;
+  margin: 0;
+}
+
+.links {
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.linksLabel {
+  color: #888;
+  margin-right: 0.5rem;
+}
+
+.link {
+  color: #00ff96;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  color: #00d47a;
+  text-shadow: 0 0 8px rgba(0, 255, 150, 0.5);
+}
+
+.linkDivider {
+  color: #444;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 3.0rem;
+}
+
+.sectionTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+/* Thinking List */
+.thinkingList {
+  list-style: none;
+  padding: 0;
+}
+
+.thinkingList li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #cccccc;
+  transition: all 0.2s ease;
+}
+
+.thinkingList li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #00ff96;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.thinkingList li:hover {
+  color: #ffffff;
+  padding-left: 2rem;
+}
+
+/* Writing Section */
+.writingList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.writingItem {
+  border-left: 2px solid #222;
+  padding-left: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.writingItem:hover {
+  border-left-color: #00ff96;
+}
+
+.writingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.writingTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  transition: all 0.2s ease;
+}
+
+.writingItem:hover .writingTitle {
+  color: #00ff96;
+}
+
+.writingDate {
+  font-size: 0.85rem;
+  color: #666;
+  font-family: 'Courier New', monospace;
+}
+
+.writingDescription {
+  color: #aaaaaa;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.seeAllLink {
+  display: inline-block;
+  color: #00ff96;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.seeAllLink:hover {
+  color: #00d47a;
+  text-shadow: 0 0 8px rgba(0, 255, 150, 0.5);
+  transform: translateX(5px);
+}
+
+/* Projects Section */
+.projectsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.projectItem {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.projectItem:hover {
+  border-color: #00ff96;
+  background: rgba(0, 255, 150, 0.03);
+}
+
+.projectItem h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+  color: #ffffff;
+}
+
+.projectItem p {
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Talks Section - Smaller and at the end */
+.talksList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.talkItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.talkContent {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.talkTitleLink {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.talkTitleLink .talkTitle {
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.talkTitleLink:hover .talkTitle {
+  color: #00ff96;
+}
+
+.videoWrapper {
+  position: relative;
+  width: 350px;  /* Changed from 280px */
+  min-width: 350px;
+  height: 197px;  /* Changed from 158px - maintains 16:9 ratio */
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #222;
+  transition: all 0.3s ease;
+}
+
+.videoWrapper:hover {
+  border-color: #00ff96;
+  box-shadow: 0 0 20px rgba(0, 255, 150, 0.2);
+}
+
+.videoEmbed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.talkInfo {
+  flex: 1;
+  padding-top: 0.25rem;
+}
+
+.talkTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.talkMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-family: 'Courier New', monospace;
+}
+
+.talkEvent {
+  color: #00ff96;
+}
+
+.talkDivider {
+  color: #444;
+}
+
+.talkDate {
+  color: #888;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2.5rem 0 2rem;
+  border-top: 1px solid #222;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profileSection {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .mainName {
+    font-size: 2rem;
+  }
+  
+  .intro {
+    font-size: 1rem;
+  }
+  
+  .lastUpdate {
+    position: static;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .main {
+    padding: 2rem 1.5rem;
+  }
+  
+  .writingHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .links {
+    font-size: 0.9rem;
+    justify-content: center;
+  }
+  
+  .projectsList {
+    grid-template-columns: 1fr;
+  }
+
+  .talkContent {
+    flex-direction: column;
+  }
+
+  .videoWrapper {
+    width: 100%;
+    min-width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Subtle animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blogContent {
+  color: #e0e0e0;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.blogContent h1,
+.blogContent h2,
+.blogContent h3 {
+  color: #ffffff;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.blogContent p {
+  margin-bottom: 1.5rem;
+}
+
+.blogContent a {
+  color: #00ff96;
+  text-decoration: underline;
+}
+
+.blogContent code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+.blogContent ul,
+.blogContent ol {
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.blogContent img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border: 2px solid #222;
+}
+
+.blogContent img + em {
+  display: block;
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+  margin: -1rem auto 2rem auto;
+  font-style: italic;
+  max-width: 600px;
+  line-height: 1.4;
+}
+
+.eventsList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.eventItem {
+  border: 1px solid #222;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+}
+
+.eventItem:hover {
+  border-color: #00ff96;
+  background: rgba(0, 255, 150, 0.03);
+}
+
+.eventImages {
+  width: 100%;
+  height: 200px;  /* Changed from 250px */
+  overflow: hidden;
+}
+
+.eventImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.eventInfo {
+  padding: 1.5rem;
+}
+
+.eventTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.eventMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 1rem;
+}
+
+.eventName {
+  color: #00ff96;
+}
+
+.eventDivider {
+  color: #444;
+}
+
+.eventDate {
+  color: #888;
+}
+
+.eventDescription {
+  color: #aaaaaa;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .eventsList {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ensInfoButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  vertical-align: middle;
+}
+
+.ensInfoButton:hover {
+  opacity: 1;
+}
+
+.ensModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.ensModalContent {
+  background: #111;
+  border: 2px solid #00ff96;
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 255, 150, 0.3);
+}
+
+.ensModalClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.ensModalClose:hover {
+  color: #00ff96;
+}
+
+.ensModalContent h2 {
+  color: #00ff96;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Courier New', monospace;
+}
+
+.ensModalContent p {
+  color: #e0e0e0;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.ensModalContent ul {
+  color: #e0e0e0;
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.ensModalContent li {
+  margin-bottom: 0.5rem;
+}
+
+.ensModalContent strong {
+  color: #00ff96;
+}
+
+.ensLearnMore {
+  display: inline-block;
+  color: #00ff96;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+
+.ensLearnMore:hover {
+  text-shadow: 0 0 8px rgba(0, 255, 150, 0.5);
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .ensModalContent {
+    padding: 2rem;
+    max-width: 90%;
+  }
+}
+
+.blogListHeader {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #222;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 0.5rem;
 }
