@@ -164,9 +164,9 @@ export default function Home() {
           <h2 className="sectionTitle">WRITING</h2>
           <div className="writingList">
             <WritingItem 
-              title="The Story Behind PeerDAS"
+              title="Harder Than You Think"
               date="12/01/2025"
-              slug="the-story-behind-peerdas"
+              slug="harder-than-you-think"
             />
             <WritingItem 
               title="I Got A Story To Tell"
@@ -188,7 +188,7 @@ export default function Home() {
           <div className="talksList">
             <Talk 
               title="Ethereum Ecosystem Overview"
-              event="Ethereum Day (Devconnect Argentina 2025)"
+              event="Ethereum Day (Devconnect Argentina)"
               date="11/17/2025"
               youtubeId="cWy0QG_Earw"
             />

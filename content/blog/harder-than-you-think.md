@@ -1,14 +1,14 @@
 ---
-title: "The Story Behind PeerDAS"
+title: "Harder Than You Think"
 date: "2025-12-01"
-slug: "the-story-behind-peerdas"
+slug: "harder-than-you-think"
 ---
 
 It's October 2017 and Vitalik is speaking at an Ethereum meetup at Stanford. The topic is a technical one called the data availability problem.
 
 In that talk he introduces the now famous Scalability Trilemma. If you have been around the blockchain space long enough, you have probably heard it hundreds of times.
 
-Tomorrow Ethereum will ship a big step toward solving that trilemma in production. The Fusaka upgrade will activate PeerDAS, a new way for nodes to check that block data is available without every node downloading everything. This post is my attempt to explain why that matters, starting from that 2017 meetup and ending with where we are today.
+In two days, Ethereum will ship a big step toward solving that trilemma in production. The Fusaka upgrade will activate PeerDAS, a new way for nodes to check that block data is available without every node downloading everything. This post is my attempt to explain why that matters, starting from that 2017 meetup and ending with where we are today.
 
 The trilemma is the idea that a blockchain can only achieve two of the following three properties at the same time.
 
@@ -78,7 +78,7 @@ That is my oversimplified version of the idea. If you want the real thing, searc
 
 And this is where the all the pieces of the post start fitting together. Once the direction was understood, there were still huge unsolved problems. How would the mempool scale? How would all the new transactions be spread across the network? How would nodes coordinate if they need to reconstruct the data?
 
-But after almost a decade of refusing to take shortcuts, the work has paid off. Tomorrow, data availability sampling will be live on Ethereum through PeerDAS. Ten years after the network launched, Ethereum is about to solve half of the core scaling problem in production. Fusaka is a monumental moment for Ethereum.
+But after almost a decade of refusing to take shortcuts, the work has paid off. In two days, data availability sampling will be live on Ethereum through PeerDAS. Ten years after the network launched, Ethereum is about to solve half of the core scaling problem in production. Fusaka is a monumental moment for Ethereum.
 
 The data availability problem is not completely solved yet. PeerDAS is the first step, and it is the first time Ethereum is doing this in production. The network will start with a conservative number of blobs and slowly increase the amount of data over time as clients, researchers, and operators build confidence. But the important part is that the foundation is now in place. For the first time, Ethereum can safely raise data capacity without raising hardware requirements. This is how blockspace grows by 10x, then 100x.
 
@@ -86,6 +86,8 @@ One of the beautiful things about the rollup centric roadmap is that it lets Eth
 
 And as exciting as PeerDAS and Fusaka are, execution scaling is also making real progress. That is a topic for another post. For now I will just say this, keep an eye on ethproofs.org.
 
-Happy Fusaka! Happy PeerDAS! Don’t forget to thank your local core dev and researcher, and cheers to choosing hard work over shortcuts despite all the external pressure.
+PeerDAS is the first moment where the trilemma starts to bend in practice. The rule has always been that you cannot stay decentralized on laptop-sized hardware and still handle way more activity than a single laptop can process. Sharding is the only path around that boundary, and with Fusaka, Ethereum is about to run that path in production for the first time. It is one step closer to a future where thousands of laptops around the world power the internet of value.
+
+So, Happy Fusaka! Happy PeerDAS! Don’t forget to thank your local core dev and researcher, and cheers to choosing hard work over shortcuts despite all the external pressure.
 
 *Special thanks to Emily Rasowsky for feedback and review.*

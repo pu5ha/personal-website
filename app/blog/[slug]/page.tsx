@@ -1,31 +1,40 @@
+import { getPostBySlug, getAllPosts } from '@/lib/blog';
+import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/blog';
+import { notFound } from 'next/navigation';
 
-export default function BlogPage() {
+export async function generateStaticParams() {
   const posts = getAllPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
 
   return (
     <div className="container">
       <main className="main">
-        <div className="blogListHeader">
-          <h1 className="mainName" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>All Writings</h1>
-          <Link href="/" className="link backLink">
-            ← Back to home
-          </Link>
-        </div>
+        <Link href="/blog" className="link" style={{ marginBottom: '2rem', display: 'inline-block' }}>
+          ← Back to all writings
+        </Link>
         
-        <div className="writingList" style={{ marginTop: '3rem' }}>
-          {posts.map((post) => (
-            <Link href={`/blog/${post.slug}`} key={post.slug}>
-              <div className="writingItem">
-                <div className="writingHeader">
-                  <h3 className="writingTitle">{post.title}</h3>
-                  <span className="writingDate">{post.date}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <article>
+          <h1 className="mainName" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
+            {post.title}
+          </h1>
+          <p className="writingDate" style={{ marginBottom: '2rem' }}>{post.date}</p>
+          
+          <div className="blogContent">
+            <ReactMarkdown>{post.content}</ReactMarkdown>
+          </div>
+        </article>
       </main>
     </div>
   );
