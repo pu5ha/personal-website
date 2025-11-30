@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
+
 interface WritingItemProps {
   title: string;
   date: string;
@@ -222,9 +223,29 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Recommended Reading Section */}
+        <section className="section">
+          <h2 className="sectionTitle">MY RECOMMENDED BLOCKCHAIN READING</h2>
+          <p style={{ color: '#cccccc', fontSize: '1.05rem', marginBottom: '1rem' }}>
+            A curated collection of essays and articles that have shaped my thinking about Ethereum, crypto, and decentralization.
+          </p>
+          <Link href="/reading" className="seeAllLink">
+            view reading list →
+          </Link>
+        </section>
+
         {/* Footer */}
         <section className="footer">
-          <p>Made with care and probably too much caffeine.</p>
+          <p>
+            <a 
+              href="https://x.com/jchaskin22/status/1510387496764555273" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="link"
+            >
+              https://x.com/jchaskin22/status/1510387496764555273
+            </a>
+          </p>
         </section>
       </main>
     </div>
