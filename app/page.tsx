@@ -209,7 +209,7 @@ export default function Home() {
             <EventItem 
               title="World of Apps"
               event="Ethereum NYC Week"
-              date="May 2024"
+              date="August 2025"
               description="Ethereum app demos with live art by professional artists."
               images={["/event-images/world-of-apps-1.jpg"]}
             />

@@ -83,7 +83,13 @@ const readings2018: ReadingItem[] = [
 ];
 
 const readings2019: ReadingItem[] = [
-  {
+    {
+        title: "Ethereum is game-changing technology, literally.",
+        author: "Virgil Griffith",
+        date: "March 29, 2019",
+        url: "https://medium.com/@virgilgr/ethereum-is-game-changing-technology-literally-d67e01a01cf8"
+    },
+    {
     title: "On Collusion",
     author: "Vitalik Buterin",
     date: "April 3, 2019",
@@ -230,217 +236,571 @@ const readings2021: ReadingItem[] = [
 ];
 
 const readings2022: ReadingItem[] = [
-  {
-    title: "Soulbound",
-    author: "Vitalik Buterin",
-    date: "January 26, 2022",
-    url: "https://vitalik.eth.limo/general/2022/01/26/soulbound.html"
-  },
-  {
-    title: "Freedom to Transact",
-    author: "punk6529",
-    date: "February 17, 2022",
-    url: "https://x.com/punk6529/status/1494444624630403083"
-  },
-  {
-    title: "The roads not taken",
-    author: "Vitalik Buterin",
-    date: "March 29, 2022",
-    url: "https://vitalik.eth.limo/general/2022/03/29/road.html"
-  },
-  {
-    title: "In Defense of Bitcoin Maximalism",
-    author: "Vitalik Buterin",
-    date: "April 1, 2022",
-    url: "https://vitalik.eth.limo/general/2022/04/01/maximalist.html"
-  },
-  {
-    title: "Atoms, Institutions, Blockchains",
-    author: "Josh Stark",
-    date: "April 13, 2022",
-    url: "https://paragraph.com/@josh-stark/atoms-institutions-blockchains"
-  },
-  {
-    title: "Ethereum's Dark Forest is worth cultivating",
-    author: "Trent Van Epps",
-    date: "May 18, 2022",
-    url: "https://paragraph.com/@trent-4/ethereum-s-dark-forest-is-worth-cultivating"
-  },
-  {
-    title: "Where to use a blockchain in non-financial applications?",
-    author: "Vitalik Buterin",
-    date: "June 12, 2022",
-    url: "https://vitalik.eth.limo/general/2022/06/12/nonfin.html"
-  },
-  {
-    title: "What do I think about network states?",
-    author: "Vitalik Buterin",
-    date: "July 13, 2022",
-    url: "https://vitalik.eth.limo/general/2022/07/13/networkstates.html"
-  },
-  {
-    title: "DAOs are not corporations: where decentralization in autonomous organizations matters",
-    author: "Vitalik Buterin",
-    date: "September 20, 2022",
-    url: "https://vitalik.eth.limo/general/2022/09/20/daos.html"
-  },
-  {
-    title: "The Revenue-Evil Curve: a different way to think about prioritizing public goods funding",
-    author: "Vitalik Buterin",
-    date: "October 28, 2022",
-    url: "https://vitalik.eth.limo/general/2022/10/28/revenue_evil.html"
-  },
-  {
-    title: "What in the Ethereum application ecosystem excites me",
-    author: "Vitalik Buterin",
-    date: "December 5, 2022",
-    url: "https://vitalik.eth.limo/general/2022/12/05/excited.html"
-  },
-  {
-    title: "What even is an institution?",
-    author: "Vitalik Buterin",
-    date: "December 30, 2022",
-    url: "https://vitalik.eth.limo/general/2022/12/30/institutions.html"
-  }
-];
+    {
+      title: "Soulbound",
+      author: "Vitalik Buterin",
+      date: "January 26, 2022",
+      url: "https://vitalik.eth.limo/general/2022/01/26/soulbound.html"
+    },
+    {
+      title: "Freedom to Transact",
+      author: "punk6529",
+      date: "February 17, 2022",
+      url: "https://x.com/punk6529/status/1494444624630403083"
+    },
+    {
+      title: "The roads not taken",
+      author: "Vitalik Buterin",
+      date: "March 29, 2022",
+      url: "https://vitalik.eth.limo/general/2022/03/29/road.html"
+    },
+    {
+      title: "In Defense of Bitcoin Maximalism",
+      author: "Vitalik Buterin",
+      date: "April 1, 2022",
+      url: "https://vitalik.eth.limo/general/2022/04/01/maximalist.html"
+    },
+    {
+      title: "Atoms, Institutions, Blockchains",
+      author: "Josh Stark",
+      date: "April 13, 2022",
+      url: "https://paragraph.com/@josh-stark/atoms-institutions-blockchains"
+    },
+    {
+      title: "The Sustainability Checklist",
+      author: "polynya",
+      date: "May 13, 2022",
+      url: "https://paragraph.com/@polynya/the-sustainability-checklist"
+    },
+    {
+      title: "Resolving Vitalik's contradictions",
+      author: "polynya",
+      date: "May 17, 2022",
+      url: "https://paragraph.com/@polynya/resolving-vitalik-s-contradictions"
+    },
+    {
+      title: "Ethereum's Dark Forest is worth cultivating",
+      author: "Trent Van Epps",
+      date: "May 18, 2022",
+      url: "https://paragraph.com/@trent-4/ethereum-s-dark-forest-is-worth-cultivating"
+    },
+    {
+      title: "Games and blockchain",
+      author: "polynya",
+      date: "May 21, 2022",
+      url: "https://paragraph.com/@polynya/games-and-blockchain"
+    },
+    {
+      title: "Where to use a blockchain in non-financial applications?",
+      author: "Vitalik Buterin",
+      date: "June 12, 2022",
+      url: "https://vitalik.eth.limo/general/2022/06/12/nonfin.html"
+    },
+    {
+      title: "What do I think about network states?",
+      author: "Vitalik Buterin",
+      date: "July 13, 2022",
+      url: "https://vitalik.eth.limo/general/2022/07/13/networkstates.html"
+    },
+    {
+      title: "The Anon Game",
+      author: "polynya",
+      date: "August 18, 2022",
+      url: "https://paragraph.com/@polynya/the-anon-game"
+    },
+    {
+        title: "TPS is a terrible metric, stop using it to compare systems",
+        author: "Kelvin Fichter",
+        date: "September 1, 2022",
+        url: "https://kelvinfichter.com/pages/thoughts/tps-is-dumb/"
+    },
+    {
+      title: "DAOs are not corporations: where decentralization in autonomous organizations matters",
+      author: "Vitalik Buterin",
+      date: "September 20, 2022",
+      url: "https://vitalik.eth.limo/general/2022/09/20/daos.html"
+    },
+    {
+      title: "Blockchain apps",
+      author: "polynya",
+      date: "September 25, 2022",
+      url: "https://paragraph.com/@polynya/blockchain-apps"
+    },
+    {
+      title: "Why rollups can offer higher throughput than L1 execution",
+      author: "polynya",
+      date: "October 3, 2022",
+      url: "https://paragraph.com/@polynya/why-rollups-can-offer-higher-throughput-than-l1-execution"
+    },
+    {
+      title: "The Revenue-Evil Curve: a different way to think about prioritizing public goods funding",
+      author: "Vitalik Buterin",
+      date: "October 28, 2022",
+      url: "https://vitalik.eth.limo/general/2022/10/28/revenue_evil.html"
+    },
+    {
+      title: "Rollup minimum viable decentralisation aka 'Stage 1'",
+      author: "polynya",
+      date: "November 6, 2022",
+      url: "https://paragraph.com/@polynya/rollup-minimum-viable-decentralisation-aka-stage-1"
+    },
+    {
+      title: "Sustainability",
+      author: "polynya",
+      date: "November 22, 2022",
+      url: "https://paragraph.com/@polynya/sustainability"
+    },
+    {
+      title: "What in the Ethereum application ecosystem excites me",
+      author: "Vitalik Buterin",
+      date: "December 5, 2022",
+      url: "https://vitalik.eth.limo/general/2022/12/05/excited.html"
+    },
+    {
+      title: "Premium execution layers",
+      author: "polynya",
+      date: "December 12, 2022",
+      url: "https://paragraph.com/@polynya/premium-execution-layers"
+    },
+    {
+      title: "TAM for 'decentralized blockspace'?",
+      author: "polynya",
+      date: "December 12, 2022",
+      url: "https://paragraph.com/@polynya/tam-for-decentralized-blockspace"
+    },
+    {
+      title: "What even is an institution?",
+      author: "Vitalik Buterin",
+      date: "December 30, 2022",
+      url: "https://vitalik.eth.limo/general/2022/12/30/institutions.html"
+    }
+  ];
 
-const readings2023: ReadingItem[] = [
-  {
-    title: "Some personal user experiences",
-    author: "Vitalik Buterin",
-    date: "February 28, 2023",
-    url: "https://vitalik.eth.limo/general/2023/02/28/ux.html"
-  },
-  {
-    title: "What do I think about Community Notes?",
-    author: "Vitalik Buterin",
-    date: "August 16, 2023",
-    url: "https://vitalik.eth.limo/general/2023/08/16/communitynotes.html"
-  },
-  {
-    title: "Crypto Twitter Found SBF's Fraud",
-    author: "Balaji Srinivasan",
-    date: "November 5, 2023",
-    url: "https://balajis.com/p/crypto-twitter-found-sbfs-fraud"
-  },
-  {
-    title: "Making Sense of Tether on Tron",
-    author: "Liam Horne",
-    date: "November 2023",
-    url: "https://liamhorne.com/stablecoins"
-  },
-  {
-    title: "My techno-optimism",
-    author: "Vitalik Buterin",
-    date: "November 27, 2023",
-    url: "https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html"
-  },
-  {
-    title: "Make Ethereum Cypherpunk Again",
-    author: "Vitalik Buterin",
-    date: "December 28, 2023",
-    url: "https://vitalik.eth.limo/general/2023/12/28/cypherpunk.html"
-  }
-];
+  const readings2023: ReadingItem[] = [
+    {
+      title: "Some personal user experiences",
+      author: "Vitalik Buterin",
+      date: "February 28, 2023",
+      url: "https://vitalik.eth.limo/general/2023/02/28/ux.html"
+    },
+    {
+      title: "Blockchain apps - take two",
+      author: "polynya",
+      date: "March 1, 2023",
+      url: "https://paragraph.com/@polynya/blockchain-apps-take-two"
+    },
+    {
+      title: "Governance and DAOs",
+      author: "polynya",
+      date: "March 9, 2023",
+      url: "https://paragraph.com/@polynya/governance-and-daos"
+    },
+    {
+      title: "Assessing demand drivers for ETH",
+      author: "polynya",
+      date: "March 16, 2023",
+      url: "https://paragraph.com/@polynya/assessing-demand-drivers-for-eth"
+    },
+    {
+      title: "Exploring the scalability needs for blockchain apps",
+      author: "polynya",
+      date: "March 27, 2023",
+      url: "https://paragraph.com/@polynya/exploring-the-scalability-needs-for-blockchain-apps"
+    },
+    {
+      title: "The efficiencies of validity proofs",
+      author: "polynya",
+      date: "May 18, 2023",
+      url: "https://paragraph.com/@polynya/the-efficiencies-of-validity-proofs"
+    },
+    {
+      title: "Games and blockchain: 2023 update",
+      author: "polynya",
+      date: "May 23, 2023",
+      url: "https://paragraph.com/@polynya/games-and-blockchain-2023-update"
+    },
+    {
+      title: "Single-player games and blockchain",
+      author: "polynya",
+      date: "May 27, 2023",
+      url: "https://paragraph.com/@polynya/single-player-games-and-blockchain"
+    },
+    {
+      title: "Evolution of the application layer feat. Uniswap",
+      author: "polynya",
+      date: "June 14, 2023",
+      url: "https://paragraph.com/@polynya/evolution-of-the-application-layer-feat-uniswap"
+    },
+    {
+      title: "Welcoming good intermediaries to crypto",
+      author: "polynya",
+      date: "June 23, 2023",
+      url: "https://paragraph.com/@polynya/welcoming-good-intermediaries-to-crypto"
+    },
+    {
+      title: "The Curious Case of Tron (feat. USDT)",
+      author: "polynya",
+      date: "July 15, 2023",
+      url: "https://paragraph.com/@polynya/the-curious-case-of-tron-feat-usdt"
+    },
+    {
+      title: "The inevitable crypto secular bear market",
+      author: "polynya",
+      date: "July 17, 2023",
+      url: "https://paragraph.com/@polynya/the-inevitable-crypto-secular-bear-market"
+    },
+    {
+      title: "Decentralization from first principles",
+      author: "polynya",
+      date: "July 18, 2023",
+      url: "https://paragraph.com/@polynya/decentralization-from-first-principles"
+    },
+    {
+      title: "Governance & DAOs Pt. II: User rights",
+      author: "polynya",
+      date: "July 29, 2023",
+      url: "https://paragraph.com/@polynya/governance-daos-pt-ii-user-rights"
+    },
+    {
+      title: "Governance & DAOs III: Cooperative models",
+      author: "polynya",
+      date: "August 9, 2023",
+      url: "https://paragraph.com/@polynya/governance-daos-iii-cooperative-models"
+    },
+    {
+      title: "Demand drivers & valuations: examining BTC, ETH & TRON/TRX",
+      author: "polynya",
+      date: "August 11, 2023",
+      url: "https://paragraph.com/@polynya/demand-drivers-valuations-examining-btc-eth-tron-trx"
+    },
+    {
+      title: "Application-centrism",
+      author: "polynya",
+      date: "August 15, 2023",
+      url: "https://paragraph.com/@polynya/application-centrism"
+    },
+    {
+      title: "What do I think about Community Notes?",
+      author: "Vitalik Buterin",
+      date: "August 16, 2023",
+      url: "https://vitalik.eth.limo/general/2023/08/16/communitynotes.html"
+    },
+    {
+      title: "Hybrid applications, and infra providers as development studios",
+      author: "polynya",
+      date: "September 21, 2023",
+      url: "https://paragraph.com/@polynya/hybrid-applications-and-infra-providers-as-development-studios"
+    },
+    {
+      title: "How to compete with Tron/USDT?",
+      author: "polynya",
+      date: "September 25, 2023",
+      url: "https://paragraph.com/@polynya/how-to-compete-with-tron-usdt"
+    },
+    {
+      title: "Understanding crypto's limitations and focusing on its unique strengths",
+      author: "polynya",
+      date: "September 28, 2023",
+      url: "https://paragraph.com/@polynya/understanding-crypto-s-limitations-and-focusing-on-its-unique-strengths"
+    },
+    {
+      title: "Blockchains are fundamentally unfair, and that's OK",
+      author: "polynya",
+      date: "October 19, 2023",
+      url: "https://paragraph.com/@polynya/blockchains-are-fundamentally-unfair-and-that-s-ok"
+    },
+    {
+      title: "The Governance Spectrum",
+      author: "polynya",
+      date: "October 21, 2023",
+      url: "https://paragraph.com/@polynya/the-governance-spectrum"
+    },
+    {
+      title: "A governance trilemma - neutrality, fairness, inclusivity",
+      author: "polynya",
+      date: "October 23, 2023",
+      url: "https://paragraph.com/@polynya/a-governance-trilemma-neutrality-fairness-inclusivity"
+    },
+    {
+      title: "State of the application layer",
+      author: "polynya",
+      date: "October 29, 2023",
+      url: "https://paragraph.com/@polynya/state-of-the-application-layer"
+    },
+    {
+      title: "Explaining my perspective on the application layer",
+      author: "polynya",
+      date: "November 2, 2023",
+      url: "https://paragraph.com/@polynya/explaining-my-perspective-on-the-application-layer"
+    },
+    {
+      title: "Making Sense of Tether on Tron",
+      author: "Liam Horne",
+      date: "November 2023",
+      url: "https://liamhorne.com/stablecoins"
+    },
+    {
+      title: "\"Crypto values\" like \"decentralization\" are only useful if they improve consumer choice and experience sustainably",
+      author: "polynya",
+      date: "November 3, 2023",
+      url: "https://paragraph.com/@polynya/crypto-values-like-decentralization-are-only-useful-if-they-improve-consumer-choice-and-experience-sustainably"
+    },
+    {
+      title: "Crypto Twitter Found SBF's Fraud",
+      author: "Balaji Srinivasan",
+      date: "November 5, 2023",
+      url: "https://balajis.com/p/crypto-twitter-found-sbfs-fraud"
+    },
+    {
+      title: "A hopium & delusion malaise is crippling the crypto industry",
+      author: "polynya",
+      date: "November 9, 2023",
+      url: "https://paragraph.com/@polynya/a-hopium-delusion-malaise-is-crippling-the-crypto-industry"
+    },
+    {
+      title: "Transaction reversibility",
+      author: "polynya",
+      date: "November 11, 2023",
+      url: "https://paragraph.com/@polynya/transaction-reversibility"
+    },
+    {
+      title: "The horrific inefficiencies of monolithic blockchains",
+      author: "polynya",
+      date: "November 17, 2023",
+      url: "https://paragraph.com/@polynya/the-horrific-inefficiencies-of-monolithic-blockchains"
+    },
+    {
+      title: "So, what should we do?",
+      author: "polynya",
+      date: "November 19, 2023",
+      url: "https://paragraph.com/@polynya/so-what-should-we-do"
+    },
+    {
+      title: "Blockchains are a centralising force, but that's OK",
+      author: "polynya",
+      date: "November 22, 2023",
+      url: "https://paragraph.com/@polynya/blockchains-are-a-centralising-force-but-that-s-ok"
+    },
+    {
+      title: "My techno-optimism",
+      author: "Vitalik Buterin",
+      date: "November 27, 2023",
+      url: "https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html"
+    },
+    {
+      title: "Examining crypto's product-market fit",
+      author: "polynya",
+      date: "December 9, 2023",
+      url: "https://paragraph.com/@polynya/examining-crypto-s-product-market-fit"
+    },
+    {
+      title: "The fragility of stablecoins' PMF",
+      author: "polynya",
+      date: "December 11, 2023",
+      url: "https://paragraph.com/@polynya/the-fragility-of-stablecoins-pmf"
+    },
+    {
+      title: "A brief history of crypto",
+      author: "polynya",
+      date: "December 19, 2023",
+      url: "https://paragraph.com/@polynya/a-brief-history-of-crypto"
+    },
+    {
+      title: "More like dumb contracts",
+      author: "polynya",
+      date: "December 20, 2023",
+      url: "https://paragraph.com/@polynya/more-like-dumb-contracts"
+    },
+    {
+      title: "Public blockchains' superpower: strict global consensus",
+      author: "polynya",
+      date: "December 25, 2023",
+      url: "https://paragraph.com/@polynya/public-blockchains-superpower-strict-global-consensus"
+    },
+    {
+      title: "Make Ethereum Cypherpunk Again",
+      author: "Vitalik Buterin",
+      date: "December 28, 2023",
+      url: "https://vitalik.eth.limo/general/2023/12/28/cypherpunk.html"
+    },
+    {
+      title: "Democratising tokenholder DAOs",
+      author: "polynya",
+      date: "December 28, 2023",
+      url: "https://paragraph.com/@polynya/democratising-tokenholder-daos"
+    }
+  ];
 
-const readings2024: ReadingItem[] = [
-  {
-    title: "Why increasing the gas limit is difficult",
-    author: "Marius Van Der Wijden",
-    date: "January 11, 2024",
-    url: ""
-  },
-  {
-    title: "Cash → Chain",
-    author: "Nalin Bhardwaj",
-    date: "January 15, 2024",
-    url: "https://daimo.com/blog/cash-chain"
-  },
-  {
-    title: "Capital and enclosure in software commons: Linux & Ethereum",
-    author: "Trent Van Epps",
-    date: "January 8, 2024",
-    url: "https://paragraph.com/@trent-4/capital-and-enclosure-in-software-commons-linux-ethereum"
-  },
-  {
-    title: "The promise and challenges of crypto + AI applications",
-    author: "Vitalik Buterin",
-    date: "January 30, 2024",
-    url: "https://vitalik.eth.limo/general/2024/01/30/cryptoai.html"
-  },
-  {
-    title: "The end of my childhood",
-    author: "Vitalik Buterin",
-    date: "January 31, 2024",
-    url: "https://vitalik.eth.limo/general/2024/01/31/end.html"
-  },
-  {
-    title: "Making sense of Trust Experience (TX)",
-    author: "Josh Stark",
-    date: "February 5, 2024",
-    url: "https://paragraph.com/@josh-stark/making-sense-of-trust-experience-tx"
-  },
-  {
-    title: "Ask security questions",
-    author: "Vitalik Buterin",
-    date: "February 9, 2024",
-    url: "https://vitalik.eth.limo/general/2024/02/09/securityquestions.html"
-  },
-  {
-    title: "New launches (part 1) - private capture, phantom pricing",
-    author: "Cobie",
-    date: "May 19, 2024",
-    url: "https://cobie.substack.com/p/new-launches-part-1-private-capture"
-  },
-  {
-    title: "How do layer 2s really differ from execution sharding?",
-    author: "Vitalik Buterin",
-    date: "May 23, 2024",
-    url: "https://vitalik.eth.limo/general/2024/05/23/l2exec.html"
-  },
-  {
-    title: "Layer 2s as cultural extensions of Ethereum",
-    author: "Vitalik Buterin",
-    date: "May 29, 2024",
-    url: "https://vitalik.eth.limo/general/2024/05/29/l2culture.html"
-  },
-  {
-    title: "Some reflections on the Bitcoin block size war",
-    author: "Vitalik Buterin",
-    date: "May 31, 2024",
-    url: "https://vitalik.eth.limo/general/2024/05/31/blocksize.html"
-  },
-  {
-    title: "Making Ethereum alignment legible",
-    author: "Vitalik Buterin",
-    date: "September 28, 2024",
-    url: "https://vitalik.eth.limo/general/2024/09/28/alignment.html"
-  },
-  {
-    title: "Protocol Guild: a funding framework for the Ethereum commons",
-    author: "Trent Van Epps",
-    date: "October 9, 2024",
-    url: "https://paragraph.com/@trent-4/protocol-guild-a-funding-framework-for-the-ethereum-commons"
-  },
-  {
-    title: "Ethereum's distinctive property is hardness",
-    author: "Josh Stark",
-    date: "November 4, 2024",
-    url: "https://paragraph.com/@josh-stark/ethereum-s-distinctive-property-is-hardness"
-  },
-  {
-    title: "From prediction markets to info finance",
-    author: "Vitalik Buterin",
-    date: "November 9, 2024",
-    url: "https://vitalik.eth.limo/general/2024/11/09/infofinance.html"
-  },
-  {
-    title: "What I would love to see in a wallet",
-    author: "Vitalik Buterin",
-    date: "December 3, 2024",
-    url: "https://vitalik.eth.limo/general/2024/12/03/wallets.html"
-  }
-];
+  const readings2024: ReadingItem[] = [
+    {
+      title: "Does your application need strict global consensus?",
+      author: "polynya",
+      date: "January 6, 2024",
+      url: "https://paragraph.com/@polynya/does-your-application-need-strict-global-consensus"
+    },
+    {
+      title: "Capital and enclosure in software commons: Linux & Ethereum",
+      author: "Trent Van Epps",
+      date: "January 8, 2024",
+      url: "https://paragraph.com/@trent-4/capital-and-enclosure-in-software-commons-linux-ethereum"
+    },
+    {
+      title: "Why increasing the gas limit is difficult",
+      author: "Marius Van Der Wijden",
+      date: "January 11, 2024",
+      url: ""
+    },
+    {
+      title: "Custodial solutions are essential",
+      author: "polynya",
+      date: "January 12, 2024",
+      url: "https://paragraph.com/@polynya/custodial-solutions-are-essential"
+    },
+    {
+      title: "Cash → Chain",
+      author: "Nalin Bhardwaj",
+      date: "January 15, 2024",
+      url: "https://daimo.com/blog/cash-chain"
+    },
+    {
+      title: "Naturalisation councils",
+      author: "polynya",
+      date: "January 20, 2024",
+      url: "https://paragraph.com/@polynya/naturalisation-councils"
+    },
+    {
+      title: "Why most crypto assets are grotesquely overvalued",
+      author: "polynya",
+      date: "January 21, 2024",
+      url: "https://paragraph.com/@polynya/why-most-crypto-assets-are-grotesquely-overvalued"
+    },
+    {
+      title: "The promise and challenges of crypto + AI applications",
+      author: "Vitalik Buterin",
+      date: "January 30, 2024",
+      url: "https://vitalik.eth.limo/general/2024/01/30/cryptoai.html"
+    },
+    {
+      title: "Are \"chains just servers w/ superpowers\"?",
+      author: "polynya",
+      date: "January 30, 2024",
+      url: "https://paragraph.com/@polynya/are-chains-just-servers-w-superpowers"
+    },
+    {
+      title: "The end of my childhood",
+      author: "Vitalik Buterin",
+      date: "January 31, 2024",
+      url: "https://vitalik.eth.limo/general/2024/01/31/end.html"
+    },
+    {
+      title: "How does strict global consensus work?",
+      author: "polynya",
+      date: "January 31, 2024",
+      url: "https://paragraph.com/@polynya/how-does-strict-global-consensus-work"
+    },
+    {
+      title: "The drawbacks of strict global consensus",
+      author: "polynya",
+      date: "February 1, 2024",
+      url: "https://paragraph.com/@polynya/the-drawbacks-of-strict-global-consensus"
+    },
+    {
+      title: "Transaction quality trilemma - blockchain killers",
+      author: "polynya",
+      date: "February 2, 2024",
+      url: "https://paragraph.com/@polynya/transaction-quality-trilemma-blockchain-killers"
+    },
+    {
+      title: "Does Vitalik's \"decentralized stack\" need strict global consensus?",
+      author: "polynya",
+      date: "February 3, 2024",
+      url: "https://paragraph.com/@polynya/does-vitalik-s-decentralized-stack-need-strict-global-consensus"
+    },
+    {
+      title: "Making sense of Trust Experience (TX)",
+      author: "Josh Stark",
+      date: "February 5, 2024",
+      url: "https://paragraph.com/@josh-stark/making-sense-of-trust-experience-tx"
+    },
+    {
+      title: "Objectivity & subjectivity",
+      author: "polynya",
+      date: "February 8, 2024",
+      url: "https://paragraph.com/@polynya/objectivity-subjectivity"
+    },
+    {
+      title: "Ask security questions",
+      author: "Vitalik Buterin",
+      date: "February 9, 2024",
+      url: "https://vitalik.eth.limo/general/2024/02/09/securityquestions.html"
+    },
+    {
+      title: "Stateless infra - where most decentralized compute will be (not blockchains)",
+      author: "polynya",
+      date: "February 10, 2024",
+      url: "https://paragraph.com/@polynya/stateless-infra-where-most-decentralized-compute-will-be-not-blockchains"
+    },
+    {
+      title: "Crypto's broken moral compass",
+      author: "polynya",
+      date: "March 24, 2024",
+      url: "https://paragraph.com/@polynya/crypto-s-broken-moral-compass"
+    },
+    {
+      title: "New launches (part 1) - private capture, phantom pricing",
+      author: "Cobie",
+      date: "May 19, 2024",
+      url: "https://cobie.substack.com/p/new-launches-part-1-private-capture"
+    },
+    {
+      title: "How do layer 2s really differ from execution sharding?",
+      author: "Vitalik Buterin",
+      date: "May 23, 2024",
+      url: "https://vitalik.eth.limo/general/2024/05/23/l2exec.html"
+    },
+    {
+      title: "Layer 2s as cultural extensions of Ethereum",
+      author: "Vitalik Buterin",
+      date: "May 29, 2024",
+      url: "https://vitalik.eth.limo/general/2024/05/29/l2culture.html"
+    },
+    {
+      title: "Some reflections on the Bitcoin block size war",
+      author: "Vitalik Buterin",
+      date: "May 31, 2024",
+      url: "https://vitalik.eth.limo/general/2024/05/31/blocksize.html"
+    },
+    {
+      title: "Making Ethereum alignment legible",
+      author: "Vitalik Buterin",
+      date: "September 28, 2024",
+      url: "https://vitalik.eth.limo/general/2024/09/28/alignment.html"
+    },
+    {
+      title: "Protocol Guild: a funding framework for the Ethereum commons",
+      author: "Trent Van Epps",
+      date: "October 9, 2024",
+      url: "https://paragraph.com/@trent-4/protocol-guild-a-funding-framework-for-the-ethereum-commons"
+    },
+    {
+      title: "Ethereum's distinctive property is hardness",
+      author: "Josh Stark",
+      date: "November 4, 2024",
+      url: "https://paragraph.com/@josh-stark/ethereum-s-distinctive-property-is-hardness"
+    },
+    {
+      title: "From prediction markets to info finance",
+      author: "Vitalik Buterin",
+      date: "November 9, 2024",
+      url: "https://vitalik.eth.limo/general/2024/11/09/infofinance.html"
+    },
+    {
+      title: "What I would love to see in a wallet",
+      author: "Vitalik Buterin",
+      date: "December 3, 2024",
+      url: "https://vitalik.eth.limo/general/2024/12/03/wallets.html"
+    }
+  ];
 
 const readings2025: ReadingItem[] = [
   {
@@ -524,12 +884,7 @@ const readings2025: ReadingItem[] = [
 ];
 
 const readingsUndated: ReadingItem[] = [
-  {
-    title: "TPS is a terrible metric, stop using it to compare systems",
-    author: "Kelvin Fichter",
-    date: "",
-    url: "https://kelvinfichter.com/pages/thoughts/tps-is-dumb/"
-  }
+
 ];
 
 export default function ReadingPage() {
