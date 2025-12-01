@@ -243,7 +243,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="link"
             >
-              https://x.com/jchaskin22/status/1510387496764555273
+              Set goals. Work hard. Be humble.
             </a>
           </p>
         </section>
