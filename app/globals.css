@@ -219,7 +219,8 @@ a {
 
 .writingDate {
   font-size: 0.85rem;
-  color: #666;
+  /* Increased contrast for better readability on dark background */
+  color: #bbbbbb;
   font-family: 'Courier New', monospace;
 }
 

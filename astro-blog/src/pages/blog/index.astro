@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+
+posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="Blog">
+  <h1 style="font-size: 2rem; margin-bottom: 0.75rem;">Blog</h1>
+  <p style="margin-bottom: 1.75rem; color: #9ca3af;">
+    Posts written in plain Markdown and rendered by Astro.
+  </p>
+
+  {posts.length === 0 ? (
+    <p>No posts yet.</p>
+  ) : (
+    <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 1.25rem;">
+      {posts.map((post) => (
+        <li>
+          <a
+            href={`/blog/${post.slug}/`}
+            style="
+              display: block;
+              padding: 1rem 1.25rem;
+              border-radius: 0.9rem;
+              background: rgba(15,23,42,0.85);
+              border: 1px solid rgba(148,163,184,0.35);
+              text-decoration: none;
+              color: inherit;
+            "
+          >
+            <h2 style="margin: 0 0 0.25rem; font-size: 1.15rem;">
+              {post.data.title}
+            </h2>
+            <p style="margin: 0 0 0.5rem; font-size: 0.85rem; color: #9ca3af;">
+              {post.data.date.toLocaleDateString()}
+            </p>
+            {post.data.description && (
+              <p style="margin: 0; font-size: 0.9rem; color: #d1d5db;">
+                {post.data.description}
+              </p>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>
+
+

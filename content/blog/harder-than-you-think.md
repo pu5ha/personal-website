@@ -27,6 +27,7 @@ This idea comes directly from the cypherpunks, who built systems designed to sur
 
 The same is true for blockchains. If users are not running nodes, a few large operators can quietly change the rules, mint new coins for themselves, or rewrite balances. Vitalik explains it better than I can:
 ![Run a node](/blog-images/run_a_node.jpg)
+
 But the short version is simple: users are the final line of defense.
 
 This also explains why some shortcut approaches to scaling do not work. Several networks raised hardware requirements until only data center machines could run full nodes. On paper this looks like scaling, but in practice it recreates the same choke points blockchains were invented to avoid. If those servers get pressured or shut down, the network goes down with them. We have seen this happen in real life. [Hetzner shut off access to Solana validators and took a large part of the network offline](https://www.theblock.co/post/182283/1000-solana-validators-go-offline-as-hetzner-blocks-server-access).
