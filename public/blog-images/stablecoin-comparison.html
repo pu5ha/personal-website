@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centralized vs Decentralized Stablecoins</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .graphic {
+    width: 960px;
+    padding: 64px 56px;
+    position: relative;
+    background: #1a1a2e;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 400;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .divider-line {
+    background: linear-gradient(to bottom, transparent, #333 15%, #333 85%, transparent);
+    position: relative;
+  }
+
+  .divider-line::after {
+    content: 'vs';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #555;
+    background: #1a1a2e;
+    padding: 14px 0;
+    letter-spacing: 1px;
+  }
+
+  .column {
+    padding: 0 36px;
+  }
+
+  .column-header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid transparent;
+  }
+
+  .col-centralized .column-header {
+    border-bottom-color: #4a2a30;
+  }
+
+  .col-decentralized .column-header {
+    border-bottom-color: #1e4a4d;
+  }
+
+  .column-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .col-centralized .column-label {
+    color: #b0636c;
+  }
+
+  .col-decentralized .column-label {
+    color: #4db8bc;
+  }
+
+  .column-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 400;
+  }
+
+  .col-centralized .column-title {
+    color: #c4707a;
+  }
+
+  .col-decentralized .column-title {
+    color: #5ecacd;
+  }
+
+  .traits {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .trait {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .trait-marker {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: 9px;
+    border-radius: 1px;
+  }
+
+  .col-centralized .trait-marker {
+    background: #c97a82;
+  }
+
+  .col-decentralized .trait-marker {
+    background: #4da8ab;
+  }
+
+  .trait-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .col-centralized .trait-text {
+    color: #a08588;
+  }
+
+  .col-decentralized .trait-text {
+    color: #7fb8ba;
+  }
+
+  .trait-text em {
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .col-centralized .trait-text em {
+    color: #d4888f;
+  }
+
+  .col-decentralized .trait-text em {
+    color: #5ecacd;
+  }
+
+  .col-decentralized {
+    position: relative;
+  }
+
+  .col-decentralized::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(40, 160, 165, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>
+</head>
+<body>
+
+<div class="graphic">
+
+  <div class="header">
+    <h1>Two Visions for the Future of Money</h1>
+  </div>
+
+  <div class="columns">
+
+    <div class="column col-centralized">
+      <div class="column-header">
+        <div class="column-label">Centralized</div>
+        <div class="column-title">Regulatory<br>Arbitrage</div>
+      </div>
+
+      <ul class="traits">
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text">Can be <em>frozen or confiscated</em></span>
+        </li>
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text">Rules set by <em>political discretion</em></span>
+        </li>
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text">Filling a <em>regulatory gap</em></span>
+        </li>
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text"><em>Replaceable</em> by a well-designed CBDC</span>
+        </li>
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text">Advantage is <em>temporary</em></span>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="divider-line"></div>
+
+    <div class="column col-decentralized">
+      <div class="column-header">
+        <div class="column-label">Decentralized</div>
+        <div class="column-title">Financial<br>Sovereignty</div>
+      </div>
+
+      <ul class="traits">
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text"><em>Cannot be frozen or confiscated</em></span>
+        </li>
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text">Rules enforced by <em>code</em></span>
+        </li>
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text"><em>Redefining</em> the system</span>
+        </li>
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text"><em>Cannot be replicated</em> by any government</span>
+        </li>
+        <li class="trait">
+          <span class="trait-marker"></span>
+          <span class="trait-text"><em>Freedom technology</em></span>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

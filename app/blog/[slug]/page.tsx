@@ -1,5 +1,6 @@
 import { getPostBySlug, getAllPosts } from '@/lib/blog';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -32,7 +33,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <p className="writingDate" style={{ marginBottom: '2rem' }}>{post.date}</p>
           
           <div className="blogContent">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
           </div>
         </article>
       </main>
