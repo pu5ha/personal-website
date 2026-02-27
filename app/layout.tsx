@@ -4,6 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Jason Chaskin",
   description: "Applications & research at the Ethereum Foundation.",
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml/',
+    },
+  },
 };
 
 export default function RootLayout({

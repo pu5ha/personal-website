@@ -1,0 +1,43 @@
+name: Notify subscribers of new blog post
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/blog/**.md'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect new blog posts
+        id: detect
+        run: |
+          NEW_FILES=$(git diff --name-only --diff-filter=A HEAD~1..HEAD -- 'content/blog/*.md')
+          if [ -z "$NEW_FILES" ]; then
+            echo "No new blog posts found."
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          else
+            # Extract slug from first new file
+            SLUG=$(echo "$NEW_FILES" | head -1 | sed 's|content/blog/||' | sed 's|\.md$||')
+            echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "New post detected: $SLUG"
+          fi
+
+      - name: Wait for Vercel deployment
+        if: steps.detect.outputs.found == 'true'
+        run: sleep 60
+
+      - name: Send email to subscribers
+        if: steps.detect.outputs.found == 'true'
+        run: |
+          curl -f -X POST "${{ vars.SITE_URL }}/api/send-post/" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.SEND_SECRET }}" \
+            -d "{\"slug\": \"${{ steps.detect.outputs.slug }}\"}"

@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import SubscribeForm from '@/app/components/SubscribeForm';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -36,6 +37,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
           </div>
         </article>
+
+        <section className="section" style={{ marginTop: '3rem' }}>
+          <SubscribeForm />
+        </section>
       </main>
     </div>
   );

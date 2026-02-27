@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import SubscribeForm from './components/SubscribeForm';
 
 
 interface RecentPost {
@@ -106,6 +107,8 @@ export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] 
             <a href="https://farcaster.xyz/chaskin.eth" className="link" target="_blank" rel="noopener noreferrer">farcaster</a>
             <span className="linkDivider">·</span>
             <a href="mailto:jason.chaskin@gmail.com" className="link">email</a>
+            <span className="linkDivider">·</span>
+            <a href="/feed.xml/" className="link">rss</a>
           </div>
         </section>
 
@@ -224,6 +227,11 @@ export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] 
           <Link href="/reading" className="seeAllLink">
             view reading list →
           </Link>
+        </section>
+
+        {/* Subscribe */}
+        <section className="section">
+          <SubscribeForm />
         </section>
 
         {/* Footer */}
