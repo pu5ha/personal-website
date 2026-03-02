@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react';
 
 export default function SubscribeForm() {
   const [email, setEmail] = useState('');
+  const [ethAddress, setEthAddress] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
@@ -15,7 +16,7 @@ export default function SubscribeForm() {
       const res = await fetch('/api/subscribe/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, ethAddress: ethAddress || undefined }),
       });
 
       const data = await res.json();
@@ -29,6 +30,7 @@ export default function SubscribeForm() {
       setStatus('success');
       setMessage('You\'re subscribed! You\'ll get new posts in your inbox.');
       setEmail('');
+      setEthAddress('');
     } catch {
       setStatus('error');
       setMessage('Something went wrong. Please try again.');
@@ -45,15 +47,25 @@ export default function SubscribeForm() {
         <p className="subscribeSuccess">{message}</p>
       ) : (
         <form onSubmit={handleSubmit} className="subscribeForm">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
-            className="subscribeInput"
-            required
-            disabled={status === 'loading'}
-          />
+          <div className="subscribeInputGroup">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              className="subscribeInput"
+              required
+              disabled={status === 'loading'}
+            />
+            <input
+              type="text"
+              value={ethAddress}
+              onChange={(e) => setEthAddress(e.target.value)}
+              placeholder="chaskin.eth (optional)"
+              className="subscribeInput"
+              disabled={status === 'loading'}
+            />
+          </div>
           <button
             type="submit"
             className="subscribeButton"

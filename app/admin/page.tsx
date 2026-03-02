@@ -122,6 +122,7 @@ export default function AdminPage() {
             <a href={`/blog/${publishedSlug}`} className="adminButton" style={{ textDecoration: 'none' }}>
               View post
             </a>
+            <a href="/admin/subscribers" className="adminNavLink" style={{ alignSelf: 'center' }}>Subscribers</a>
             <button
               onClick={() => {
                 setTitle('');
@@ -148,9 +149,12 @@ export default function AdminPage() {
       <main className="main">
         <div className="adminHeader">
           <h1 className="mainName" style={{ fontSize: '2rem' }}>New Post</h1>
-          <button onClick={handleLogout} className="adminLogoutButton">
-            Log out
-          </button>
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <a href="/admin/subscribers" className="adminNavLink">Subscribers</a>
+            <button onClick={handleLogout} className="adminLogoutButton">
+              Log out
+            </button>
+          </div>
         </div>
 
         <div className="adminField">
