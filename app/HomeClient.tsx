@@ -95,7 +95,7 @@ export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] 
                 </button>
               </h1>
               <p className="intro">
-                App Relations & Research Lead at the Ethereum Foundation
+                App Relations Lead at the Ethereum Foundation
               </p>
             </div>
           </div>
@@ -151,16 +151,6 @@ export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] 
             </div>
           </div>
         )}
-
-        {/* Currently Thinking About */}
-        <section className="section">
-          <h2 className="sectionTitle">CURRENTLY THINKING ABOUT</h2>
-          <ul className="thinkingList">
-            <li>How the Ethereum Foundation can help Ethereum applications grow</li>
-            <li>Defeating decentralization's final boss: network effects</li>
-            <li>How Ethereum combines with other p2p technologies to enable entirely new types of applications</li>
-          </ul>
-        </section>
 
         {/* Writing Section */}
         <section className="section">

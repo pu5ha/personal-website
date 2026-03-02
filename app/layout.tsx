@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Jason Chaskin",
-  description: "Applications & research at the Ethereum Foundation.",
+  description: "App Relations Lead at the Ethereum Foundation.",
   alternates: {
     types: {
       'application/rss+xml': '/feed.xml/',
