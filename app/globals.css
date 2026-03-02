@@ -135,6 +135,70 @@ a {
   color: #444;
 }
 
+/* Hero Buttons */
+.heroButtons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.heroButton {
+  padding: 0.6rem 1.75rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.heroButtonPrimary {
+  background: #00ff96;
+  color: #000;
+  border: 2px solid #00ff96;
+}
+
+.heroButtonPrimary:hover:not(:disabled) {
+  background: #00d47a;
+  border-color: #00d47a;
+  box-shadow: 0 0 12px rgba(0, 255, 150, 0.3);
+}
+
+.heroButtonPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.heroButtonSecondary {
+  background: transparent;
+  color: #e0e0e0;
+  border: 2px solid #444;
+}
+
+.heroButtonSecondary:hover {
+  border-color: #888;
+  color: #ffffff;
+}
+
+.heroSubscribeForm {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  max-width: 550px;
+  flex-wrap: wrap;
+}
+
+.heroSubscribeForm .subscribeInput {
+  flex: 1;
+  min-width: 150px;
+}
+
+.heroSubscribeForm .subscribeError {
+  width: 100%;
+}
+
 /* Sections */
 .section {
   margin-bottom: 3.5rem;

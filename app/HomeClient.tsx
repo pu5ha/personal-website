@@ -30,6 +30,36 @@ interface EventItemProps {
 export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] }) {
   const [displayName, setDisplayName] = useState('');
   const [showEnsInfo, setShowEnsInfo] = useState(false);
+  const [showSubscribe, setShowSubscribe] = useState(false);
+  const [heroEmail, setHeroEmail] = useState('');
+  const [heroEthAddress, setHeroEthAddress] = useState('');
+  const [heroStatus, setHeroStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [heroMessage, setHeroMessage] = useState('');
+
+  async function handleHeroSubscribe(e: React.FormEvent) {
+    e.preventDefault();
+    setHeroStatus('loading');
+    try {
+      const res = await fetch('/api/subscribe/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: heroEmail, ethAddress: heroEthAddress || undefined }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setHeroStatus('error');
+        setHeroMessage(data.error || 'Something went wrong.');
+        return;
+      }
+      setHeroStatus('success');
+      setHeroMessage("You're subscribed!");
+      setHeroEmail('');
+      setHeroEthAddress('');
+    } catch {
+      setHeroStatus('error');
+      setHeroMessage('Something went wrong. Please try again.');
+    }
+  }
 
   useEffect(() => {
     const name = 'Jason Chaskin.eth';
@@ -110,6 +140,55 @@ export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] 
             <span className="linkDivider">·</span>
             <a href="/feed.xml/" className="link">rss</a>
           </div>
+
+          <div className="heroButtons">
+            <button
+              className="heroButton heroButtonPrimary"
+              onClick={() => setShowSubscribe(!showSubscribe)}
+            >
+              {heroStatus === 'success' ? 'Subscribed' : 'Subscribe'}
+            </button>
+            <a
+              href="https://signal.me/#eu/chaz.50"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="heroButton heroButtonSecondary"
+            >
+              Message
+            </a>
+          </div>
+
+          {showSubscribe && heroStatus !== 'success' && (
+            <form onSubmit={handleHeroSubscribe} className="heroSubscribeForm">
+              <input
+                type="email"
+                value={heroEmail}
+                onChange={(e) => setHeroEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="subscribeInput"
+                required
+                disabled={heroStatus === 'loading'}
+              />
+              <input
+                type="text"
+                value={heroEthAddress}
+                onChange={(e) => setHeroEthAddress(e.target.value)}
+                placeholder="chaskin.eth (optional)"
+                className="subscribeInput"
+                disabled={heroStatus === 'loading'}
+              />
+              <button
+                type="submit"
+                className="heroButton heroButtonPrimary"
+                disabled={heroStatus === 'loading'}
+              >
+                {heroStatus === 'loading' ? 'Subscribing...' : 'Go'}
+              </button>
+              {heroStatus === 'error' && (
+                <p className="subscribeError">{heroMessage}</p>
+              )}
+            </form>
+          )}
         </section>
 
         {/* ENS Info Modal */}
