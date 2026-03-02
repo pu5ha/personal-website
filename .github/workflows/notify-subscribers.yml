@@ -37,7 +37,7 @@ jobs:
       - name: Send email to subscribers
         if: steps.detect.outputs.found == 'true'
         run: |
-          curl -f -X POST "${{ vars.SITE_URL }}/api/send-post" \
+          curl -f -L --post301 --post302 --post303 -X POST "${{ vars.SITE_URL }}/api/send-post" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.SEND_SECRET }}" \
             -d "{\"slug\": \"${{ steps.detect.outputs.slug }}\"}"
