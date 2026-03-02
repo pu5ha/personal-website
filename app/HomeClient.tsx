@@ -98,7 +98,7 @@ export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] 
     <div className="container">
       {/* Last updated */}
       <div className="lastUpdate">
-        last update: 27 Feb 2026
+        last update: 02 Mar 2026
       </div>
 
       <main className="main">
