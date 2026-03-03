@@ -1,11 +1,16 @@
 import { BlogPost } from './blog';
 
-function markdownToHtml(markdown: string): string {
+function markdownToHtml(markdown: string, siteUrl: string): string {
   return markdown
     // Headers
     .replace(/^### (.+)$/gm, '<h3 style="color:#ffffff;font-size:18px;margin:24px 0 12px;">$1</h3>')
     .replace(/^## (.+)$/gm, '<h2 style="color:#ffffff;font-size:22px;margin:28px 0 14px;">$1</h2>')
     .replace(/^# (.+)$/gm, '<h1 style="color:#ffffff;font-size:26px;margin:32px 0 16px;">$1</h1>')
+    // Images (must be before links since ![...](...) contains [...](...))
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_match, alt, src) => {
+      const absoluteSrc = src.startsWith('/') ? `${siteUrl}${src}` : src;
+      return `<img src="${absoluteSrc}" alt="${alt}" style="max-width:100%;height:auto;border-radius:8px;margin:16px 0;" />`;
+    })
     // Bold and italic
     .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
     .replace(/\*\*(.+?)\*\*/g, '<strong style="color:#ffffff;">$1</strong>')
@@ -18,8 +23,9 @@ function markdownToHtml(markdown: string): string {
 }
 
 export function renderPostToEmailHtml(post: BlogPost, postUrl: string): string {
+  const siteUrl = postUrl.replace(/\/blog\/.*$/, '');
   const preview = post.content.slice(0, 2000);
-  const previewHtml = markdownToHtml(preview);
+  const previewHtml = markdownToHtml(preview, siteUrl);
   const isTruncated = post.content.length > 2000;
 
   return `<!DOCTYPE html>
