@@ -62,19 +62,20 @@ export default function SubscribersPage() {
   async function fetchSubscribers() {
     setFetching(true);
     try {
-      const res = await fetch('/api/admin/subscribers');
+      const res = await fetch('/api/admin/subscribers', { credentials: 'same-origin' });
       if (!res.ok) {
         if (res.status === 401) {
           setView('login');
           return;
         }
-        throw new Error('Failed to fetch');
+        const errData = await res.json().catch(() => null);
+        throw new Error(errData?.error || `HTTP ${res.status}`);
       }
       const data = await res.json();
       setContacts(data.contacts);
       setTotal(data.total);
-    } catch {
-      setError('Failed to load subscribers');
+    } catch (err) {
+      setError(`Failed to load subscribers: ${err instanceof Error ? err.message : 'unknown error'}`);
     } finally {
       setFetching(false);
     }

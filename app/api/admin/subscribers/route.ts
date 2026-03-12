@@ -14,18 +14,22 @@ export async function GET() {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const audienceId = process.env.RESEND_AUDIENCE_ID!;
 
-    const allContacts: { id: string; email: string; last_name: string | null; created_at: string; unsubscribed: boolean }[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const allContacts: any[] = [];
     let after: string | undefined;
+    let pages = 0;
 
     // Paginate through all contacts using limit/after pagination
     do {
-      const params: { audienceId: string; limit?: number; after?: string } = { audienceId, limit: 100 };
-      if (after) params.after = after;
+      pages++;
+      const listParams: Record<string, unknown> = { audienceId, limit: 100 };
+      if (after) listParams.after = after;
 
-      const { data, error } = await resend.contacts.list(params);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data, error } = await resend.contacts.list(listParams as any);
 
       if (error) {
-        console.error('Resend list error:', error);
+        console.error('Resend list error:', JSON.stringify(error));
         break;
       }
 
@@ -41,7 +45,8 @@ export async function GET() {
         );
 
         // Use the last contact's ID as the cursor for the next page
-        if (data.has_more && data.data.length > 0) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((data as any).has_more && data.data.length > 0) {
           after = data.data[data.data.length - 1].id;
         } else {
           break;
@@ -49,6 +54,9 @@ export async function GET() {
       } else {
         break;
       }
+
+      // Safety limit to prevent function timeouts
+      if (pages >= 20) break;
     } while (true);
 
     return NextResponse.json({
