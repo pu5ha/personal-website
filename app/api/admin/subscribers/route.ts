@@ -63,9 +63,10 @@ export async function GET() {
       total: allContacts.length,
     });
   } catch (error) {
-    console.error('Subscribers list error:', error);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error('Subscribers list error:', message);
     return NextResponse.json(
-      { error: 'Failed to fetch subscribers' },
+      { error: `Failed to fetch subscribers: ${message}` },
       { status: 500 }
     );
   }

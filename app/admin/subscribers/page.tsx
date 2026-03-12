@@ -62,7 +62,7 @@ export default function SubscribersPage() {
   async function fetchSubscribers() {
     setFetching(true);
     try {
-      const res = await fetch('/api/admin/subscribers', { credentials: 'same-origin' });
+      const res = await fetch('/api/admin/subscribers/');
       if (!res.ok) {
         if (res.status === 401) {
           setView('login');
