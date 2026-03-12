@@ -12,7 +12,6 @@ export async function GET() {
 
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const audienceId = process.env.RESEND_AUDIENCE_ID!;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const allContacts: any[] = [];
@@ -22,7 +21,7 @@ export async function GET() {
     // Paginate through all contacts using limit/after pagination
     do {
       pages++;
-      const listParams: Record<string, unknown> = { audienceId, limit: 100 };
+      const listParams: Record<string, unknown> = { limit: 100 };
       if (after) listParams.after = after;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
