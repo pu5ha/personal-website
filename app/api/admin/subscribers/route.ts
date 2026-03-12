@@ -15,12 +15,12 @@ export async function GET() {
     const audienceId = process.env.RESEND_AUDIENCE_ID!;
 
     const allContacts: { id: string; email: string; last_name: string | null; created_at: string; unsubscribed: boolean }[] = [];
-    let cursor: string | undefined;
+    let after: string | undefined;
 
-    // Paginate through all contacts
+    // Paginate through all contacts using limit/after pagination
     do {
-      const params: { audienceId: string; cursor?: string } = { audienceId };
-      if (cursor) params.cursor = cursor;
+      const params: { audienceId: string; limit?: number; after?: string } = { audienceId, limit: 100 };
+      if (after) params.after = after;
 
       const { data, error } = await resend.contacts.list(params);
 
@@ -39,16 +39,16 @@ export async function GET() {
             unsubscribed: c.unsubscribed,
           }))
         );
-      }
 
-      // Check for next page cursor - Resend uses cursor-based pagination
-      // If we got fewer than expected or no cursor info, stop
-      const hasMore = data?.data && data.data.length > 0;
-      // Resend doesn't expose a next cursor directly in the SDK response,
-      // so we break after the first call if there's no pagination indicator
-      if (!hasMore) break;
-      // The Resend SDK doesn't provide cursor in list response, so we get all in one call
-      break;
+        // Use the last contact's ID as the cursor for the next page
+        if (data.has_more && data.data.length > 0) {
+          after = data.data[data.data.length - 1].id;
+        } else {
+          break;
+        }
+      } else {
+        break;
+      }
     } while (true);
 
     return NextResponse.json({
