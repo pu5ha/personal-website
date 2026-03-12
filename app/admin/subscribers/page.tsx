@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AdminPasskeyLogin from '@/components/AdminPasskeyLogin';
 
 type View = 'login' | 'subscribers';
 
@@ -20,9 +21,7 @@ interface ImportResult {
 
 export default function SubscribersPage() {
   const [view, setView] = useState<View>('login');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [total, setTotal] = useState(0);
@@ -32,31 +31,9 @@ export default function SubscribersPage() {
   const [importing, setImporting] = useState(false);
   const [importResult, setImportResult] = useState<ImportResult | null>(null);
 
-  async function handleLogin(e: React.FormEvent) {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-
-    try {
-      const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
-
-      if (!res.ok) {
-        setError('Invalid password');
-        return;
-      }
-
-      setView('subscribers');
-      setPassword('');
-      fetchSubscribers();
-    } catch {
-      setError('Login failed');
-    } finally {
-      setLoading(false);
-    }
+  function handleLoginSuccess() {
+    setView('subscribers');
+    fetchSubscribers();
   }
 
   async function fetchSubscribers() {
@@ -121,33 +98,7 @@ export default function SubscribersPage() {
   }
 
   if (view === 'login') {
-    return (
-      <div className="container">
-        <main className="main">
-          <div className="adminHeader">
-            <h1 className="mainName" style={{ fontSize: '2rem' }}>Subscribers</h1>
-          </div>
-          <form onSubmit={handleLogin} className="adminLoginForm">
-            <div className="adminField">
-              <label className="adminLabel" htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="adminInput"
-                placeholder="Enter admin password"
-                disabled={loading}
-              />
-            </div>
-            {error && <p className="adminError">{error}</p>}
-            <button type="submit" className="adminButton" disabled={loading}>
-              {loading ? 'Logging in...' : 'Log in'}
-            </button>
-          </form>
-        </main>
-      </div>
-    );
+    return <AdminPasskeyLogin title="Subscribers" onSuccess={handleLoginSuccess} />;
   }
 
   return (
