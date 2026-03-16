@@ -1,20 +1,52 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import AdminPasskeyLogin from '@/components/AdminPasskeyLogin';
 
-type View = 'login' | 'editor' | 'success';
+type View = 'checking' | 'login' | 'editor' | 'success';
 
 export default function AdminPage() {
-  const [view, setView] = useState<View>('login');
+  const [view, setView] = useState<View>('checking');
+
+  useEffect(() => {
+    fetch('/api/admin/check')
+      .then((res) => setView(res.ok ? 'editor' : 'login'))
+      .catch(() => setView('login'));
+  }, []);
+  const [password, setPassword] = useState('');
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [publishedSlug, setPublishedSlug] = useState('');
+
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      if (!res.ok) {
+        setError('Invalid password');
+        return;
+      }
+
+      setView('editor');
+      setPassword('');
+    } catch {
+      setError('Login failed');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function handleLogout() {
     await fetch('/api/admin/logout', { method: 'POST' });
@@ -52,8 +84,44 @@ export default function AdminPage() {
     }
   }
 
+  if (view === 'checking') {
+    return (
+      <div className="container">
+        <main className="main">
+          <p style={{ color: '#888', fontFamily: "'Courier New', monospace" }}>Checking authentication...</p>
+        </main>
+      </div>
+    );
+  }
+
   if (view === 'login') {
-    return <AdminPasskeyLogin title="Admin" onSuccess={() => setView('editor')} />;
+    return (
+      <div className="container">
+        <main className="main">
+          <div className="adminHeader">
+            <h1 className="mainName" style={{ fontSize: '2rem' }}>Admin</h1>
+          </div>
+          <form onSubmit={handleLogin} className="adminLoginForm">
+            <div className="adminField">
+              <label className="adminLabel" htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="adminInput"
+                placeholder="Enter admin password"
+                disabled={loading}
+              />
+            </div>
+            {error && <p className="adminError">{error}</p>}
+            <button type="submit" className="adminButton" disabled={loading}>
+              {loading ? 'Logging in...' : 'Log in'}
+            </button>
+          </form>
+        </main>
+      </div>
+    );
   }
 
   if (view === 'success') {

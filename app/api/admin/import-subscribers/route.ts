@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { Resend } from 'resend';
-import { verifyAdminToken } from '@/lib/auth';
 
 export async function POST(request: Request) {
-  const isAdmin = await verifyAdminToken();
-  if (!isAdmin) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('admin_token');
+
+  if (!token || token.value !== 'authenticated') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
