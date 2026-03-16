@@ -19,14 +19,6 @@ interface TalkProps {
   youtubeId: string;
 }
 
-interface EventItemProps {
-  title: string;
-  event: string;
-  date: string;
-  description: string;
-  images: string[];
-}
-
 export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] }) {
   const [displayName, setDisplayName] = useState('');
   const [showEnsInfo, setShowEnsInfo] = useState(false);
@@ -266,27 +258,6 @@ export default function HomeClient({ recentPosts }: { recentPosts: RecentPost[] 
           </div>
         </section>
 
-        {/* Events Section */}
-        <section className="section">
-          <h2 className="sectionTitle">EVENTS</h2>
-          <div className="eventsList">
-            <EventItem
-              title="World of Apps"
-              event="Ethereum NYC Week"
-              date="August 2025"
-              description="Ethereum app demos with live art by professional artists."
-              images={["/event-images/world-of-apps-1.jpg"]}
-            />
-            <EventItem
-              title="App Town Hall"
-              event="Devconnect Argentina"
-              date="November 2025"
-              description="App community presentations and feedback with live art by professional artists."
-              images={["/event-images/app-town-hall-1.jpg"]}
-            />
-          </div>
-        </section>
-
         {/* Recommended Reading Section */}
         <section className="section">
           <h2 className="sectionTitle">MY RECOMMENDED BLOCKCHAIN READING</h2>
@@ -370,28 +341,3 @@ function Talk({ title, event, date, youtubeId }: TalkProps) {
   );
 }
 
-// Event Item Component
-function EventItem({ title, event, date, description, images }: EventItemProps) {
-  return (
-    <div className="eventItem">
-      <div className="eventImages">
-        <Image
-          src={images[0]}
-          alt={title}
-          width={800}
-          height={400}
-          className="eventImage"
-        />
-      </div>
-      <div className="eventInfo">
-        <h3 className="eventTitle">{title}</h3>
-        <div className="eventMeta">
-          <span className="eventName">{event}</span>
-          <span className="eventDivider">·</span>
-          <span className="eventDate">{date}</span>
-        </div>
-        <p className="eventDescription">{description}</p>
-      </div>
-    </div>
-  );
-}
