@@ -20,7 +20,7 @@ And that’s exactly why it’s revolutionary because it threatens existing powe
 
 Ethereum is no longer an early-stage experiment. Five years ago, critical smart contract bugs that ended entire applications were common and the UX was unusable for most people. That’s no longer true.
 
-Core primitives like swapping, lending, and trustless stablecoins have gone through multiple iterations over the past eight years. The code is battle-tested and robust. The design is close to it’s final, more modular, state. UX isn’t perfect, but it’s dramatically better. It’s easy to forget how far it’s come. Making an onchain transaction today versus just a few years ago is night and day.
+Core primitives like swapping, lending, and trustless stablecoins have gone through multiple iterations over the past eight years. The code is battle-tested and robust. The design is close to its final, more modular, state. UX isn’t perfect, but it’s dramatically better. It’s easy to forget how far it’s come. Making an onchain transaction today versus just a few years ago is night and day. And that progress isn’t just L1. L2s have been live for over 4.5 years, and zkEVMs are moving faster than anyone expected. It’s time to take the training wheels off.
 
 We are not early.
 
