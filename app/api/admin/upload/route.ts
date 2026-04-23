@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { title, date, content } = await request.json();
+    const { title, date, content, slug: existingSlug } = await request.json();
 
     if (!title || !date || !content) {
       return NextResponse.json(
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const slug = generateSlug(title);
+    const slug = existingSlug || generateSlug(title);
     if (!slug) {
       return NextResponse.json(
         { error: 'Could not generate a valid slug from the title' },
@@ -59,6 +59,28 @@ ${content}
     const filePath = `content/blog/${slug}.md`;
     const encodedContent = Buffer.from(markdown).toString('base64');
 
+    let fileSha: string | undefined;
+    if (existingSlug) {
+      const shaResponse = await fetch(
+        `https://api.github.com/repos/${githubRepo}/contents/${filePath}`,
+        {
+          headers: {
+            Authorization: `Bearer ${githubToken}`,
+            Accept: 'application/vnd.github.v3+json',
+          },
+        }
+      );
+      if (shaResponse.ok) {
+        const shaData = await shaResponse.json();
+        fileSha = shaData.sha;
+      } else {
+        return NextResponse.json(
+          { error: 'Could not find existing post to update' },
+          { status: 404 }
+        );
+      }
+    }
+
     const githubResponse = await fetch(
       `https://api.github.com/repos/${githubRepo}/contents/${filePath}`,
       {
@@ -69,9 +91,10 @@ ${content}
           Accept: 'application/vnd.github.v3+json',
         },
         body: JSON.stringify({
-          message: `Add blog post: ${title}`,
+          message: existingSlug ? `Update blog post: ${title}` : `Add blog post: ${title}`,
           content: encodedContent,
           branch: 'main',
+          ...(fileSha && { sha: fileSha }),
         }),
       }
     );

@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 
-type View = 'checking' | 'login' | 'editor' | 'success';
+type View = 'checking' | 'login' | 'list' | 'editor' | 'success';
 
 export default function AdminPage() {
   const [view, setView] = useState<View>('checking');
 
   useEffect(() => {
     fetch('/api/admin/check')
-      .then((res) => setView(res.ok ? 'editor' : 'login'))
+      .then((res) => setView(res.ok ? 'list' : 'login'))
       .catch(() => setView('login'));
   }, []);
   const [password, setPassword] = useState('');
@@ -21,6 +21,15 @@ export default function AdminPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [publishedSlug, setPublishedSlug] = useState('');
+  const [editingSlug, setEditingSlug] = useState<string | null>(null);
+  const [posts, setPosts] = useState<{ slug: string; title: string; date: string }[]>([]);
+  const [loadingPosts, setLoadingPosts] = useState(false);
+
+  useEffect(() => {
+    if (view === 'list') {
+      fetchPosts();
+    }
+  }, [view]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -39,7 +48,7 @@ export default function AdminPage() {
         return;
       }
 
-      setView('editor');
+      setView('list');
       setPassword('');
     } catch {
       setError('Login failed');
@@ -57,15 +66,56 @@ export default function AdminPage() {
     setError('');
   }
 
+  async function fetchPosts() {
+    setLoadingPosts(true);
+    try {
+      const res = await fetch('/api/admin/posts');
+      if (res.ok) {
+        setPosts(await res.json());
+      }
+    } catch {
+      // silently fail
+    } finally {
+      setLoadingPosts(false);
+    }
+  }
+
+  async function handleEdit(slug: string) {
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch(`/api/admin/posts?slug=${encodeURIComponent(slug)}`);
+      if (!res.ok) {
+        setError('Failed to load post');
+        return;
+      }
+      const post = await res.json();
+      setTitle(post.title);
+      setDate(post.date);
+      setContent(post.content);
+      setEditingSlug(slug);
+      setView('editor');
+    } catch {
+      setError('Failed to load post');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handlePublish() {
     setError('');
     setLoading(true);
 
     try {
+      const body: Record<string, string> = { title, date, content };
+      if (editingSlug) {
+        body.slug = editingSlug;
+      }
+
       const res = await fetch('/api/admin/upload', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, date, content }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -129,7 +179,7 @@ export default function AdminPage() {
       <div className="container">
         <main className="main">
           <div className="adminHeader">
-            <h1 className="mainName" style={{ fontSize: '2rem' }}>Published</h1>
+            <h1 className="mainName" style={{ fontSize: '2rem' }}>{editingSlug ? 'Updated' : 'Published'}</h1>
           </div>
           <p style={{ color: '#00ff96', fontFamily: "'Courier New', monospace", marginBottom: '1.5rem' }}>
             Your post has been committed to GitHub. It will be live after Vercel redeploys (~30-60s).
@@ -145,11 +195,12 @@ export default function AdminPage() {
                 setDate(new Date().toISOString().split('T')[0]);
                 setContent('');
                 setPublishedSlug('');
-                setView('editor');
+                setEditingSlug(null);
+                setView('list');
               }}
               className="adminButton"
             >
-              Write another
+              Back to Posts
             </button>
             <button onClick={handleLogout} className="adminLogoutButton">
               Log out
@@ -160,12 +211,92 @@ export default function AdminPage() {
     );
   }
 
+  if (view === 'list') {
+    return (
+      <div className="container">
+        <main className="main">
+          <div className="adminHeader">
+            <h1 className="mainName" style={{ fontSize: '2rem' }}>Posts</h1>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+              <button
+                onClick={() => {
+                  setTitle('');
+                  setDate(new Date().toISOString().split('T')[0]);
+                  setContent('');
+                  setEditingSlug(null);
+                  setError('');
+                  setView('editor');
+                }}
+                className="adminButton"
+              >
+                New Post
+              </button>
+              <a href="/admin/subscribers" className="adminNavLink">Subscribers</a>
+              <button onClick={handleLogout} className="adminLogoutButton">
+                Log out
+              </button>
+            </div>
+          </div>
+
+          {loadingPosts ? (
+            <p style={{ color: '#888', fontFamily: "'Courier New', monospace" }}>Loading posts...</p>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {posts.map((post) => (
+                <div
+                  key={post.slug}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '0.75rem 1rem',
+                    border: '1px solid #333',
+                    borderRadius: '4px',
+                    fontFamily: "'Courier New', monospace",
+                  }}
+                >
+                  <div>
+                    <span style={{ color: '#e0e0e0' }}>{post.title}</span>
+                    <span style={{ color: '#666', marginLeft: '1rem', fontSize: '0.85rem' }}>{post.date}</span>
+                  </div>
+                  <button
+                    onClick={() => handleEdit(post.slug)}
+                    className="adminButton"
+                    style={{ padding: '0.25rem 0.75rem', fontSize: '0.85rem' }}
+                    disabled={loading}
+                  >
+                    Edit
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          {error && <p className="adminError">{error}</p>}
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <main className="main">
         <div className="adminHeader">
-          <h1 className="mainName" style={{ fontSize: '2rem' }}>New Post</h1>
+          <h1 className="mainName" style={{ fontSize: '2rem' }}>{editingSlug ? 'Edit Post' : 'New Post'}</h1>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <button
+              onClick={() => {
+                setEditingSlug(null);
+                setTitle('');
+                setDate(new Date().toISOString().split('T')[0]);
+                setContent('');
+                setError('');
+                setView('list');
+              }}
+              className="adminNavLink"
+              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+            >
+              Back to Posts
+            </button>
             <a href="/admin/subscribers" className="adminNavLink">Subscribers</a>
             <button onClick={handleLogout} className="adminLogoutButton">
               Log out
@@ -227,7 +358,7 @@ export default function AdminPage() {
           className="adminPublishButton"
           disabled={loading || !title || !date || !content}
         >
-          {loading ? 'Publishing...' : 'Publish'}
+          {loading ? (editingSlug ? 'Saving...' : 'Publishing...') : (editingSlug ? 'Save Changes' : 'Publish')}
         </button>
       </main>
     </div>
