@@ -4,6 +4,7 @@ import rehypeRaw from 'rehype-raw';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import SubscribeForm from '@/app/components/SubscribeForm';
+import { markdownComponents } from '@/app/components/markdownComponents';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -34,7 +35,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <p className="writingDate" style={{ marginBottom: '2rem' }}>{post.date}</p>
           
           <div className="blogContent">
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}</ReactMarkdown>
           </div>
         </article>
 

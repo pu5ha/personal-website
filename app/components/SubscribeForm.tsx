@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 
-export default function SubscribeForm() {
+export default function SubscribeForm({ showHeading = true }: { showHeading?: boolean }) {
   const [email, setEmail] = useState('');
   const [ethAddress, setEthAddress] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -39,10 +39,14 @@ export default function SubscribeForm() {
 
   return (
     <div className="subscribeSection">
-      <h2 className="sectionTitle">SUBSCRIBE</h2>
-      <p className="subscribeDescription">
-        Get new posts delivered to your inbox.
-      </p>
+      {showHeading && (
+        <>
+          <h2 className="sectionTitle">SUBSCRIBE</h2>
+          <p className="subscribeDescription">
+            Get new posts delivered to your inbox.
+          </p>
+        </>
+      )}
       {status === 'success' ? (
         <p className="subscribeSuccess">{message}</p>
       ) : (

@@ -3,8 +3,11 @@
 import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import { markdownComponents } from '../components/markdownComponents';
 
 type View = 'checking' | 'login' | 'list' | 'editor' | 'success';
+
+const DRAFT_KEY = 'admin_new_post_draft';
 
 export default function AdminPage() {
   const [view, setView] = useState<View>('checking');
@@ -30,6 +33,46 @@ export default function AdminPage() {
       fetchPosts();
     }
   }, [view]);
+
+  // Autosave the draft of a NEW post to localStorage so it survives closing
+  // the tab or navigating away. Editing an existing post is not autosaved.
+  useEffect(() => {
+    if (view === 'editor' && editingSlug === null) {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({ title, date, content }));
+    }
+  }, [view, editingSlug, title, date, content]);
+
+  function openNewPost() {
+    setEditingSlug(null);
+    setError('');
+    const today = new Date().toISOString().split('T')[0];
+    let restored = false;
+    try {
+      const saved = localStorage.getItem(DRAFT_KEY);
+      if (saved) {
+        const draft = JSON.parse(saved);
+        setTitle(draft.title || '');
+        setDate(draft.date || today);
+        setContent(draft.content || '');
+        restored = draft.title || draft.content;
+      }
+    } catch {
+      // ignore corrupt draft
+    }
+    if (!restored) {
+      setTitle('');
+      setDate(today);
+      setContent('');
+    }
+    setView('editor');
+  }
+
+  function discardDraft() {
+    localStorage.removeItem(DRAFT_KEY);
+    setTitle('');
+    setDate(new Date().toISOString().split('T')[0]);
+    setContent('');
+  }
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -125,6 +168,9 @@ export default function AdminPage() {
         return;
       }
 
+      if (!editingSlug) {
+        localStorage.removeItem(DRAFT_KEY);
+      }
       setPublishedSlug(data.slug);
       setView('success');
     } catch {
@@ -219,14 +265,7 @@ export default function AdminPage() {
             <h1 className="mainName" style={{ fontSize: '2rem' }}>Posts</h1>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <button
-                onClick={() => {
-                  setTitle('');
-                  setDate(new Date().toISOString().split('T')[0]);
-                  setContent('');
-                  setEditingSlug(null);
-                  setError('');
-                  setView('editor');
-                }}
+                onClick={openNewPost}
                 className="adminButton"
               >
                 New Post
@@ -286,9 +325,6 @@ export default function AdminPage() {
             <button
               onClick={() => {
                 setEditingSlug(null);
-                setTitle('');
-                setDate(new Date().toISOString().split('T')[0]);
-                setContent('');
                 setError('');
                 setView('list');
               }}
@@ -297,6 +333,19 @@ export default function AdminPage() {
             >
               Back to Posts
             </button>
+            {!editingSlug && (
+              <button
+                onClick={() => {
+                  if (confirm('Discard this draft? This cannot be undone.')) {
+                    discardDraft();
+                  }
+                }}
+                className="adminNavLink"
+                style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+              >
+                Discard Draft
+              </button>
+            )}
             <a href="/admin/subscribers" className="adminNavLink">Subscribers</a>
             <button onClick={handleLogout} className="adminLogoutButton">
               Log out
@@ -343,7 +392,7 @@ export default function AdminPage() {
             <span className="adminLabel">Preview</span>
             <div className="adminPreviewContent blogContent">
               {content ? (
-                <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
+                <ReactMarkdown rehypePlugins={[rehypeRaw]} components={markdownComponents}>{content}</ReactMarkdown>
               ) : (
                 <p style={{ color: '#666' }}>Preview will appear here...</p>
               )}
